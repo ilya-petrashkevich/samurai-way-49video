@@ -14,5 +14,5 @@ const rerenderEntireTree = () => {
         document.getElementById('root')
     );
 }
-// store.subscribe(rerenderEntireTree);
+
 rerenderEntireTree();

@@ -1,75 +1,66 @@
 import React from 'react';
 import styles from './users.module.css';
 import {UsersPropsType} from "./UsersContainer";
+import /* * as*/ axios from "axios";
+import userPhoto from '../../assets/images/user.png';
 
+export class Users extends React.Component<UsersPropsType>/*<any, any>*/ {
 
-const Users = (props: UsersPropsType) => {
-    if (props.usersPage.users.length === 0) {
-        props.setUsers(
-            [
-                {
-                    id: 1,
-                    photoURL: 'https://comp-pro.ru/wp-content/uploads/b/7/0/b702c0cdba04fbaca0a1226ecf052fac.jpeg',
-                    followed: false,
-                    fullName: 'Dmitry',
-                    status: 'boss',
-                    location: {city: 'Minsk', country: 'Belarus'}
-                },
-                {
-                    id: 2,
-                    photoURL: 'https://comp-pro.ru/wp-content/uploads/b/7/0/b702c0cdba04fbaca0a1226ecf052fac.jpeg',
-                    followed: true,
-                    fullName: 'Sasha',
-                    status: 'boss',
-                    location: {city: 'Moscow', country: 'Russia'}
-                },
-                {
-                    id: 3,
-                    photoURL: 'https://comp-pro.ru/wp-content/uploads/b/7/0/b702c0cdba04fbaca0a1226ecf052fac.jpeg',
-                    followed: false,
-                    fullName: 'Andrew',
-                    status: 'boss',
-                    location: {city: 'Kiev', country: 'Ukraine'}
-                }
-            ]
-        )
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
-    return (
-        <div>
-            {
-                props.usersPage.users.map(u => <div key={u.id}>
+    // getUsers = () => {
+    //     if (this.props.usersPage.users.length === 0) {
+    //         axios.get('https://social-network.samuraijs.com/api/1.0/users')
+    //             .then(response => {
+    //                 this.props.setUsers(response.data.items)
+    //             })
+    //     }
+    // }
+
+    render() {
+        return (
+            <div>
+                {/*<button onClick={this.getUsers}>Get Users</button>*/}
+                {
+                    this.props.usersPage.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photoURL} className={styles.userPhoto}/>
+                            <img src={!u.photoURL ? userPhoto : u.photoURL/*u.photoURL*/} className={styles.userPhoto}
+                                 alt={'user-avatar'}/>
                         </div>
                         <div>
                             {u.followed
                                 ?
                                 <button onClick={() => {
-                                    props.unfollow(u.id)
+                                    this.props.unfollow(u.id)
                                 }}>Unfollow</button>
                                 :
                                 <button onClick={() => {
-                                    props.follow(u.id)
+                                    this.props.follow(u.id)
                                 }}>Follow</button>
                             }
                         </div>
                     </span>
-                    <span>
                         <span>
-                            <div>{u.fullName}</div>
+                        <span>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
                         </span>
                     </span>
-                </div>)
-            }
-        </div>
-    );
-};
+                    </div>)
+                }
+            </div>
+        );
+    }
+}
 
-export default Users;
+// export default Users;

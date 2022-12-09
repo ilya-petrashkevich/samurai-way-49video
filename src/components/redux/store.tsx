@@ -76,24 +76,24 @@ let users: UserType[] = [
     {
         id: 1,
         photoURL: 'https://comp-pro.ru/wp-content/uploads/b/7/0/b702c0cdba04fbaca0a1226ecf052fac.jpeg',
-        followed: false,
-        fullName: 'Dmitry',
+        followed: false,//fullName: 'Dmitry'
+        name: 'Dmitry',
         status: 'boss',
         location: {city: 'Minsk', country: 'Belarus'}
     },
     {
         id: 2,
         photoURL: 'https://comp-pro.ru/wp-content/uploads/b/7/0/b702c0cdba04fbaca0a1226ecf052fac.jpeg',
-        followed: true,
-        fullName: 'Sasha',
+        followed: true, //fullName: 'Sasha'
+        name: 'Sasha',
         status: 'boss',
         location: {city: 'Moscow', country: 'Russia'}
     },
     {
         id: 3,
         photoURL: 'https://comp-pro.ru/wp-content/uploads/b/7/0/b702c0cdba04fbaca0a1226ecf052fac.jpeg',
-        followed: false,
-        fullName: 'Andrew',
+        followed: false, //fullName: 'Andrew'
+        name: 'Andrew',
         status: 'boss',
         location: {city: 'Kiev', country: 'Ukraine'}
     }
